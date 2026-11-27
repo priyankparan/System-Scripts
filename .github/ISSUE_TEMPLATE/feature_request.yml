@@ -1,0 +1,19 @@
+name: Feature Request
+description: Suggest an improvement or new option for System-Scripts
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What would you like added or improved?
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation & Safety Considerations
+      description: Why is this useful, and what should remain untouched?
+    validations:
+      required: true

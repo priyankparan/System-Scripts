@@ -1,0 +1,37 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in update.sh or sysedit.sh
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue. For security vulnerabilities, please use [GitHub Security Advisories](https://github.com/priyankparan/System-Scripts/security/advisories/new) instead of a public issue.
+  - type: dropdown
+    id: script
+    attributes:
+      label: Affected Script
+      options:
+        - Scripts/update.sh (sysupdate)
+        - Scripts/sysedit.sh (sysedit)
+        - Both / Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Bug
+      description: What happened vs. what you expected to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: command_output
+    attributes:
+      label: Command & Output
+      description: Paste the exact command (`sysupdate ...` or `sysedit ...`) and terminal output.
+      render: shell
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Arch Linux / paru v2.x / bash 5.x"

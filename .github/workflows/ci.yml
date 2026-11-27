@@ -1,0 +1,43 @@
+name: ShellCheck & Syntax CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-smoke:
+    name: ShellCheck & Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Ensure ShellCheck is installed
+        run: |
+          if ! command -v shellcheck >/dev/null 2>&1; then
+            sudo apt-get update && sudo apt-get install -y --no-install-recommends shellcheck
+          fi
+          shellcheck --version
+
+      - name: Verify executable permissions
+        run: |
+          test -x Scripts/update.sh
+          test -x Scripts/sysedit.sh
+
+      - name: Bash syntax check
+        run: bash -n Scripts/*.sh
+
+      - name: ShellCheck static analysis
+        run: shellcheck -S warning Scripts/*.sh
+
+      - name: CLI help smoke tests
+        run: |
+          ./Scripts/update.sh --help >/dev/null
+          ./Scripts/sysedit.sh --help >/dev/null
