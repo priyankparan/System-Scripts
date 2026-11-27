@@ -1,5 +1,3 @@
-Before all, I generated this with AI and have been using it for 2 months now, i wanted to upload it here. Its my first repo.
-
 # System-Scripts
 
 Transparent, zero-magic Arch Linux maintenance utilities designed to keep system updates fast, safe, and completely visible.
@@ -13,6 +11,7 @@ Every command executed is printed to the terminal (`$ <command>`) before running
 ```text
 System-Scripts/
 ├── README.md
+├── LICENSE
 └── Scripts/
     ├── update.sh    # Daily package updates, cache cleanup & health audit (sysupdate)
     └── sysedit.sh   # Dedicated Timeshift snapshots & SSD TRIM utility (sysedit)
@@ -22,19 +21,23 @@ System-Scripts/
 
 ## Installation
 
-1. Clone the repository and mark the scripts executable:
+1. **Clone the repository and make the scripts executable:**
    ```bash
-   git clone <repo-url> ~/Projects/System-Scripts
-   cd ~/Projects/System-Scripts
+   git clone https://github.com/priyankparan/System-Scripts.git
+   cd System-Scripts
    chmod +x Scripts/update.sh Scripts/sysedit.sh
    ```
 
-2. Symlink both scripts into `~/.local/bin` (ensure `~/.local/bin` is in your `PATH`):
+2. **Symlink both scripts into `~/.local/bin`:**
    ```bash
    mkdir -p ~/.local/bin
    ln -sfn "$PWD/Scripts/update.sh" ~/.local/bin/sysupdate
    ln -sfn "$PWD/Scripts/sysedit.sh" ~/.local/bin/sysedit
    ```
+
+3. **Ensure `~/.local/bin` is in your `PATH`** (if not already configured in your shell):
+   - **Bash / Zsh**: `export PATH="$HOME/.local/bin:$PATH"`
+   - **Fish**: `fish_add_path ~/.local/bin`
 
 ---
 
@@ -97,7 +100,7 @@ Neither script touches:
 - Application configs, editor settings, or dotfiles
 - Browser profiles, logins, cookies, bookmarks, or history
 - Desktop Trash (`~/.local/share/Trash`) or cloud mounts
-- GPU shader caches (`mesa_shader_cache`, `radv_builtin_shaders`)
+- GPU shader caches (e.g., Mesa / RADV shader caches)
 - BIOS/UEFI firmware updates
 - Existing Timeshift snapshots (never auto-deleted by `sysedit` or `sysupdate`)
 
@@ -114,6 +117,6 @@ Neither script touches:
 
 ## License & Disclaimer
 
-Licensed under the [MIT License](LICENSE) — **Copyright (c) 2026 Eliather**.
+Licensed under the [MIT License](LICENSE).
 
-These scripts are provided **"as is"**, without warranty of any kind. The author (**Eliather**) bears **no responsibility or liability** for any data loss, package breakage, or unintended system changes resulting from running or modifying these scripts — review the code and use at your own risk.
+These scripts are provided **"as is"**, without warranty of any kind. The maintainers bear **no responsibility or liability** for any data loss, package breakage, or unintended system changes resulting from running or modifying these scripts — review the code and use at your own risk.
