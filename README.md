@@ -1,3 +1,5 @@
+Before all, I generated this with AI and have been using it for 2 months now, i wanted to upload it here. Its my first repo.
+
 # System-Scripts
 
 Transparent, zero-magic Arch Linux maintenance utilities designed to keep system updates fast, safe, and completely visible.
