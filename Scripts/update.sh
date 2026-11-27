@@ -209,7 +209,8 @@ if [[ "$CLEAN_ONLY" == false ]]; then
         ok "Cleared stale pacman lock"
     fi
 
-    export MAKEFLAGS="-j$(nproc 2>/dev/null || echo 4)"
+    MAKEFLAGS="-j$(nproc 2>/dev/null || echo 4)"
+    export MAKEFLAGS
     run_or_warn sudo pacman -Sy --needed --noconfirm archlinux-keyring
 
     case "$PKG_TOOL" in
@@ -220,8 +221,8 @@ if [[ "$CLEAN_ONLY" == false ]]; then
 
     # Remove orphaned dependencies if present
     while orphans=$(pacman -Qtdq 2>/dev/null) && [[ -n "$orphans" ]]; do
-        # shellcheck disable=SC2086
-        run_or_warn sudo pacman -Rns --noconfirm $orphans || break
+        readarray -t orphan_arr <<< "$orphans"
+        run_or_warn sudo pacman -Rns --noconfirm "${orphan_arr[@]}" || break
     done
 
     # Flatpaks (only if flatpak has installed apps/runtimes)
